@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comp228_db_javafx_demo.HelloController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <Button fx:id="createButton" mnemonicParsing="false" onAction="#CreateTableAction" text="Create Table" />
+   <Button fx:id="dropButton" mnemonicParsing="false" onAction="#DropTableAction" text="Drop Table" />
+   <Label text="Student Id" />
+   <TextField fx:id="sIdField" />
+   <Label text="Student Name" />
+   <TextField fx:id="sNameField" />
+   <Button fx:id="addButton" mnemonicParsing="false" onAction="#AddDataAction" text="Add Data" />
+   <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+     <columns>
+       <TableColumn fx:id="s_id_column" prefWidth="75.0" text="Id" />
+       <TableColumn fx:id="s_name_column" prefWidth="75.0" text="Name" />
+     </columns>
+   </TableView>
+   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#DeleteAction" text="Delete" />
+
+  <Label fx:id="welcomeText" />
+</VBox>
