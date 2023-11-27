@@ -44,10 +44,14 @@ public class HelloController {
     }
 
     public void DeleteAction(ActionEvent actionEvent) throws SQLException{
+        Student student = (Student) table.getSelectionModel().getSelectedItem();
+        DBUtil.deleteData("COMP228_M10", student.getId());
+        populateData();
     }
 
     public void AddDataAction(ActionEvent actionEvent) throws SQLException{
         DBUtil.insertData("COMP228_M10", parseInt(sIdField.getText()), sNameField.getText());
+        populateData();
     }
     public void populateData() throws SQLException{
         ResultSet rs = DBUtil.query("SELECT * FROM COMP228_M10");
@@ -59,9 +63,10 @@ public class HelloController {
             students.add(student);
         }
         // assign each attribute to each student class
-        s_id_column.setCellFactory(new PropertyValueFactory("id")); // name of the student attribute
-        s_name_column.setCellFactory(new PropertyValueFactory("name")); // name of the id attribute
+        s_id_column.setCellValueFactory(new PropertyValueFactory("id")); // name of the student attribute
+        s_name_column.setCellValueFactory(new PropertyValueFactory("name")); // name of the id attribute
 
+        // sorting is optional
         // clear the table
         table.getItems().clear();
         // add all students
@@ -70,5 +75,8 @@ public class HelloController {
         s_id_column.setSortType(TableColumn.SortType.ASCENDING);
         table.getSortOrder().add(s_id_column);
         table.sort();
+    }
+    public void initialize()throws SQLException{
+        populateData();
     }
 }

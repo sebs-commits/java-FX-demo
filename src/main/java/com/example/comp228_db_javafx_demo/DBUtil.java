@@ -1,5 +1,7 @@
 package com.example.comp228_db_javafx_demo;
 import java.sql.*;
+import javax.sql.rowset.RowSetProvider;
+import javax.sql.rowset.CachedRowSet;
 
 public class DBUtil {
     private static Connection connection = null;
@@ -43,8 +45,10 @@ public class DBUtil {
         dbDisconnect();
     }
     public static ResultSet query(String sql) throws SQLException{
+        CachedRowSet crs = RowSetProvider.newFactory().createCachedRowSet();
         dbConnect();
         ResultSet resultSet = statement.executeQuery(sql);
+        crs.populate(resultSet);
         while(resultSet.next()){
             String s_name = resultSet.getString("s_name");
             int s_id = resultSet.getInt("s_id");
@@ -52,7 +56,7 @@ public class DBUtil {
         }
         if (statement != null) statement.close();
         dbDisconnect();
-        return resultSet;
+        return crs;
     }
     public static void deleteData(String tableName, int id) throws SQLException{
         dbConnect();
